@@ -1,0 +1,47 @@
+cabal-version:          2.2
+name:                   easy-rewriting
+version:                1.0.0
+synopsis:               Easy-to-use DSL for equational reasoning
+description:            This library aids in rewriting Haskell expressions correctly. It is intended for equational reasoning, semi-formal proofs etc, and designed to be easy to use.
+                        .
+                        The `examples` directory contains examples of how it can be used, as does the `EasyRewriting` module.
+author:                 Simon Alling
+maintainer:             Simon Alling
+homepage:               https://github.com/SimonAlling/easy-rewriting
+bug-reports:            https://github.com/SimonAlling/easy-rewriting/issues
+license:                MIT
+license-file:           LICENSE
+category:               DSL, Math, Refactoring, Tools, Utility
+build-type:             Simple
+extra-source-files:     README.md, ChangeLog.md
+tested-with:            GHC ==8.0.2, GHC ==8.2.2, GHC ==8.4.4
+
+library
+  default-language:     Haskell2010
+  hs-source-dirs:       src
+  ghc-options:          -Wall
+  exposed-modules:      EasyRewriting
+                      , EasyRewriting.Check
+                      , EasyRewriting.Rewrite
+  build-depends:        base >= 4 && < 5
+
+test-suite spec
+  type:                 exitcode-stdio-1.0
+  default-language:     Haskell2010
+  hs-source-dirs:       test, examples
+  ghc-options:          -Wall -Wno-type-defaults
+  main-is:              Spec.hs
+  build-depends:        base >= 4 && < 5
+                      , easy-rewriting
+                      , hspec
+                      , QuickCheck
+  other-modules:        Examples.AbstractSyntax
+                      , Examples.Arithmetic
+                      , Examples.Function
+                      , Examples.Monad
+                      , Examples.Trivial
+  other-extensions:     RebindableSyntax
+
+source-repository head
+  type:                 git
+  location:             https://github.com/SimonAlling/easy-rewriting
