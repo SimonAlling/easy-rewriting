@@ -42,10 +42,26 @@ Run the test suite:
 
 Since the library is designed to be used quite interactively, you probably want to try it out in GHCi as well:
 
-    cabal build
+    cabal new-build
     ghci examples/Examples/Monad.hs
     > import EasyRewriting
     > checkAt (Just (Just True)) defineJoinUsingBind
     Seems legit!
 
-If this doesn't work for you, you can try with `cabal exec ghci` instead of `ghci` and/or `new-build` instead of `build`.
+(`cabal new-build` creates a GHC environment file (e.g. `.ghc.environment.x86_64-linux-8.4.4`) which makes it possible to import `EasyRewriting` in GHCi without installing `easy-rewriting` globally.
+If it doesn't work, you can try `cabal install` instead of `cabal new-build`.)
+
+You can create and check rewrite chains on the fly using GHCi's multiline syntax (`:{ ... :}`):
+
+    cabal new-build
+    ghci
+    > :set -XRebindableSyntax -XNoImplicitPrelude
+    > import Prelude hiding ((>>))
+    > import EasyRewriting
+    > :{
+    | check $ do
+    |   8 + 5
+    |   5 + 8
+    |   done
+    | :}
+    Seems legit!
