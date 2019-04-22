@@ -1,6 +1,21 @@
 # easy-rewriting
 
 This library aids in rewriting Haskell expressions correctly. It is intended for equational reasoning, semi-formal proofs etc, and designed to be easy to use.
+In essence, it lets you write
+
+```haskell
+mySimplification :: Rewrite Integer
+mySimplification = do
+  56 + 8 * 25
+  56 + 200
+  256
+  done
+```
+
+and then (for example in GHCi)
+
+    > check mySimplification
+    Seems legit!
 
 The [`examples`](examples/) directory contains examples of how it can be used, as does the [documentation](https://hackage.haskell.org/package/easy-rewriting).
 
